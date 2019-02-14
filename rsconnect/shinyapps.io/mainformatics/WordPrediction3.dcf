@@ -1,0 +1,10 @@
+name: WordPrediction3
+title: WordPrediction3
+username:
+account: mainformatics
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 713012
+bundleId: 1875815
+url: https://mainformatics.shinyapps.io/WordPrediction3/
+when: 1550139824.58515
