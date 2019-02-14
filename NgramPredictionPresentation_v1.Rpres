@@ -1,0 +1,79 @@
+
+Next Word Prediction
+========================================================
+author: Michel Marien
+date: 13-02-2019
+autosize: true
+width:  1400
+height: 900
+font-family: 'Calibri'
+transition: fade
+transition-speed: slow
+
+Introduction
+========================================================
+
+This is the accompanying presentation for the final assignment
+of the Coursera' JHU Data Science Course. The assigment 
+consisted of:
+
+1. Acquire and cleanup 3 Swiftkey datasets:
+  1. Twitter-data (163 MB, txt-file)
+  2. US News-data (201 MB, txt-file)
+  3. US Blogs-data (205 MB, txt-file)
+2. Build a reference database with Ngrams for predicting the next word
+3. Build a Shiny app interface to predict the next words
+4. Create a Presentation to explain the work methods and workings of the app
+
+
+Source code for ui.R and server.R is avaliable at:
+https://github.com/Vosmeer/Course10
+
+Application is running at:
+https://mainformatics.shinyapps.io/WordPrediction3/
+
+Application features
+========================================================
+type: alert
+
+The application allows the user to type in sentences. The App will automatically check the entered words and sentences against its database and make suggestions to the writer. The writer can automatically paste the choosen suggestions by clicking on it.
+
+To reduce the size of the App, stopwords ("Smart") and profanity words are removed form database running in the background. These cleanup-actions are also applied to the text entered by the writer. To give the writer a sense of the last word that is used for prediction, this is also provided on the main panel.
+
+Algorithm description
+========================================================
+
+  - All text has been cleaned by:
+    - All text to lower-case
+    - All numbers removed from the text
+    - All punctuation remove (intra word contractions are preserved)
+    - All white-spaces reduced to single whitespace
+    - All stopwords removed (based on the smart-stopwords-set)
+    - All profanity words removed (based on facebook, revision 2018-07-30)
+
+  - The source datasets were reduced to a random sample 5% of the original size
+  
+  - 1-grams, 2-grams, 3-grams and 4-grams were created from all 3 sources and combined in 4 datasets
+
+  - Predictions are based on a combination of the Kneser-Ney-algorithm and stupid backoff
+  
+  - The App defaults to the 3 most used words in de sources if no match can be found
+
+  
+Future steps
+========================================================
+type: alert
+
+Up until this point the App is bases solely on ngrams created from only 5% of the available data. Primairy focus during the development has been to minimize the "lag" between typing and suggesting. 
+Future improvements will be made along 3 paths:
+
+-Part-of-speech tagging:
+Adding this feature to the algorithm will increase accuracy of the prediction because the suggestions will no longer be based on the last (couple of) words but als on nouns and verbs in the data
+
+-Increase database:
+The database used for comparing ngrams will be increased to incomparate a larger percentage of twitter/blogs/USnews-data while trying to minimize the increase the time necessary to initialize the database and search time
+
+-Adding user data:
+A feature to save user data and add this to the ngram-database will be added to implemented to tailor the use of the app much closer to the actual user
+
+
